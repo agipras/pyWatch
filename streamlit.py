@@ -12,17 +12,19 @@ import matplotlib.pyplot as plt
 cekcek = ['BNB', 'ETH', 'BTC', 'LTC', 'XRP', 'USDT', 'DOGE', 'ABBC', 'BIDR']#, 'UNI']
 
 for cek in cekcek:
+    my_bar = st.progress(0)
+    
     st.write(cek + "\n")
     scraper = CmcScraper(cek)
     df = scraper.get_dataframe()
     close = df["Close"].values[:2000][::-1]
 
     koleksi_hasil = []
-    prog = 0
-    for w in range(10, 50):
-        for p in range(1, 10):
+    prog = 1
+    for w in range(49, 50):
+        for p in range(7, 9):
             #print(w, p)
-            st.progress(prog/400)
+            my_bar.progress(prog/2)
             prog += 1
             #w = 10
             #p = 7
@@ -55,10 +57,6 @@ for cek in cekcek:
 
             koleksi_hasil.append([w, p, np.argmax(hasil)+3, max(hasil)])
     koleksi_hasil = np.asarray(koleksi_hasil)
-    #plt.plot(koleksi_hasil[:,3])
-    #plt.show()
-    from sklearn.metrics import confusion_matrix, accuracy_score
-    import seaborn as sns
 
     w = int(koleksi_hasil[np.argmax(koleksi_hasil[:,3])][0])
     p = int(koleksi_hasil[np.argmax(koleksi_hasil[:,3])][1])
@@ -84,8 +82,6 @@ for cek in cekcek:
     neigh = KNeighborsClassifier(n_neighbors=int(koleksi_hasil[np.argmax(koleksi_hasil[:,3])][2]))
     neigh.fit(x_train, y_train)
     hasil = confusion_matrix(neigh.predict(x_test), y_test)
-    #sns.heatmap(hasil)
     acc = accuracy_score(neigh.predict(x_test), y_test)
-    st.write(acc)
-    #plt.show()
+    st.write(acc, w, p)
     st.write(neigh.predict((close[-w:]-np.min(close[-w:]))/(np.max(close[-w:])-np.min(close[-w:])).reshape(1,-1)))
