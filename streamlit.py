@@ -157,13 +157,13 @@ def cek_sehari(cek):
     return [
       neigh_high.predict(
         ((high[-w:]-np.min(high[-w:]))/(np.max(high[-w:])-np.min(high[-w:]))).reshape(1, -1)
-      ) * (np.max(high[-w:])-np.min(high[-w:])) + np.min(high[-w:])[0],
+      ) * (np.max(high[-w:])-np.min(high[-w:])) + np.min(high[-w:]),
       neigh.predict(
         ((close[-w:]-np.min(close[-w:]))/(np.max(close[-w:])-np.min(close[-w:]))).reshape(1, -1)
-      ) * (np.max(close[-w:])-np.min(close[-w:])) + np.min(close[-w:])[0],
+      ) * (np.max(close[-w:])-np.min(close[-w:])) + np.min(close[-w:]),
       neigh_low.predict(
         ((low[-w:]-np.min(low[-w:]))/(np.max(low[-w:])-np.min(low[-w:]))).reshape(1, -1)
-      ) * (np.max(low[-w:])-np.min(low[-w:])) + np.min(low[-w:])[0]
+      ) * (np.max(low[-w:])-np.min(low[-w:])) + np.min(low[-w:])
     ]
     
 def cek_naikTurun(cek):
@@ -240,7 +240,7 @@ def cek_naikTurun(cek):
     st.write(acc, w, p)
     st.write("stat: " + str(neigh.predict((close[-w:]-np.min(close[-w:]))/(np.max(close[-w:])-np.min(close[-w:])).reshape(1,-1))[0]))
     next_price = cek_sehari(cek)
-    st.write(next_price)
+    st.write(next_price[0][0], next_price[1][0], next_price[2][0])
 
 for cek in cekcek:
     cek_naikTurun(cek)
