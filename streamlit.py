@@ -12,9 +12,8 @@ import matplotlib.pyplot as plt
 cekcek = ['BNB', 'ETH', 'BTC', 'LTC', 'XRP', 'USDT', 'DOGE', 'ABBC', 'BIDR']#, 'UNI']
 
 for cek in cekcek:
+    st.write(cek)
     my_bar = st.progress(0)
-    
-    st.write(cek + "\n")
     scraper = CmcScraper(cek)
     df = scraper.get_dataframe()
     close = df["Close"].values[:2000][::-1]
