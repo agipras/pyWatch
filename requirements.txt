@@ -1,2 +1,3 @@
 cryptocmd
 scikit-learn
+seaborn
