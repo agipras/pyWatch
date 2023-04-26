@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 
 cekcek = ['BNB', 'ETH', 'BTC', 'LTC', 'XRP', 'USDT', 'DOGE', 'ABBC', 'BIDR']#, 'UNI']
 
-def cek_sehari(cek):
+def cek_hari(cek, hari):
     scraper = CmcScraper(cek)
     df = scraper.get_dataframe()
     close = df["Close"].values[:2000][::-1]
@@ -23,7 +23,7 @@ def cek_sehari(cek):
     koleksi_hasil_high = []
     koleksi_hasil_low = []
     for w in range(45, 50):
-        for p in range(1, 2):
+        for p in range(hari, hari+1):
             x = [(close[_:_+w]-np.min(close[_:_+w]))/(np.max(close[_:_+w])-np.min(close[_:_+w])) for _ in range(close.shape[0]-(w+p-1))]
             y = [(close[_+w+p-1]-np.min(close[_:_+w]))/(np.max(close[_:_+w])-np.min(close[_:_+w])) for _ in range(close.shape[0]-(w+p-1))]
 
@@ -239,8 +239,10 @@ def cek_naikTurun(cek):
     acc = accuracy_score(neigh.predict(x_test), y_test)
     st.write(acc, w, p)
     st.write("stat: " + str(neigh.predict((close[-w:]-np.min(close[-w:]))/(np.max(close[-w:])-np.min(close[-w:])).reshape(1,-1))[0]))
-    next_price = cek_sehari(cek)
-    st.write(next_price[0][0], next_price[1][0], next_price[2][0])
+    next_price = cek_hari(cek, 1)
+    st.write("1 hari", next_price[0][0], next_price[1][0], next_price[2][0])
+    next_price = cek_hari(cek, 7)
+    st.write("7 hari", next_price[0][0], next_price[1][0], next_price[2][0])
 
 for cek in cekcek:
     cek_naikTurun(cek)
