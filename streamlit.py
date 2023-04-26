@@ -84,4 +84,4 @@ for cek in cekcek:
     hasil = confusion_matrix(neigh.predict(x_test), y_test)
     acc = accuracy_score(neigh.predict(x_test), y_test)
     st.write(acc, w, p)
-    st.write(neigh.predict((close[-w:]-np.min(close[-w:]))/(np.max(close[-w:])-np.min(close[-w:])).reshape(1,-1)))
+    st.write("stat: " + str(neigh.predict((close[-w:]-np.min(close[-w:]))/(np.max(close[-w:])-np.min(close[-w:])).reshape(1,-1))[0]))
