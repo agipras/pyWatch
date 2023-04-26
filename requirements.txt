@@ -1,1 +1,2 @@
 cryptocmd
+scikit-learn
