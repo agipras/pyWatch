@@ -238,7 +238,7 @@ def cek_naikTurun(cek):
     hasil = confusion_matrix(neigh.predict(x_test), y_test)
     acc = accuracy_score(neigh.predict(x_test), y_test)
     st.write(acc, w, p)
-    st.write("stat: " + str(neigh.predict((close[-w:]-np.min(close[-w:]))/(np.max(close[-w:])-np.min(close[-w:])).reshape(1,-1))[0]))
+    st.write("harga", close[-1], "stat: " + str(neigh.predict((close[-w:]-np.min(close[-w:]))/(np.max(close[-w:])-np.min(close[-w:])).reshape(1,-1))[0]))
     next_price = cek_hari(cek, 1)
     st.write("1 hari", next_price[0][0], next_price[1][0], next_price[2][0])
     next_price = cek_hari(cek, 7)
