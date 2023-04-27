@@ -8,6 +8,7 @@ from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor
 from sklearn.metrics import confusion_matrix, accuracy_score, mean_absolute_error
 import seaborn as sns
 import matplotlib.pyplot as plt
+import altair as alt
 
 cekcek = ['BNB', 'ETH', 'BTC', 'LTC', 'XRP', 'USDT', 'DOGE', 'ABBC', 'BIDR']#, 'UNI']
 
