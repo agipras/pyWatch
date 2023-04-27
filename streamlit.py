@@ -95,7 +95,7 @@ def cek_hari(cek, hari):
             my_bar.progress(prog/5)
             prog += 1
     
-    del my_bar
+    my_bar.empty()
     
     koleksi_hasil = np.asarray(koleksi_hasil)
     koleksi_hasil_high = np.asarray(koleksi_hasil_high)
@@ -176,13 +176,15 @@ def cek_hari(cek, hari):
     
 def cek_naikTurun(cek):
     st.write(cek)
-    my_bar = st.progress(0)
     scraper = CmcScraper(cek)
     df = scraper.get_dataframe()
     close = df["Close"].values[:2000][::-1]
 
-    koleksi_hasil = []
+    my_bar = st.progress(0)
     prog = 1
+    
+    koleksi_hasil = []
+    
     for w in range(49, 50):
         for p in range(7, 9):
             #print(w, p)
@@ -218,6 +220,9 @@ def cek_naikTurun(cek):
                 hasil.append(accuracy_score(neigh.predict(x_test), y_test))
 
             koleksi_hasil.append([w, p, np.argmax(hasil)+3, max(hasil)])
+    
+    mybar.empty()
+    
     koleksi_hasil = np.asarray(koleksi_hasil)
 
     w = int(koleksi_hasil[np.argmax(koleksi_hasil[:,3])][0])
