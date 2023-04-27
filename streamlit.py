@@ -221,7 +221,7 @@ def cek_naikTurun(cek):
 
             koleksi_hasil.append([w, p, np.argmax(hasil)+3, max(hasil)])
     
-    mybar.empty()
+    my_bar.empty()
     
     koleksi_hasil = np.asarray(koleksi_hasil)
 
