@@ -17,7 +17,9 @@ def cek_hari(cek, hari):
     close = df["Close"].values[:2000][::-1]
     high = df["High"].values[:2000][::-1]
     low = df["Low"].values[:2000][::-1]
-    #close = df["Close"].values[:2000][::-1]
+    
+    my_bar = st.progress(0)
+    prog = 1
 
     koleksi_hasil = []
     koleksi_hasil_high = []
@@ -89,6 +91,12 @@ def cek_hari(cek, hari):
             koleksi_hasil.append([w, p, np.argmin(hasil)+3, min(hasil)])
             koleksi_hasil_high.append([w, p, np.argmin(hasil_high)+3, min(hasil)])
             koleksi_hasil_low.append([w, p, np.argmin(hasil_low)+3, min(hasil_low)])
+            
+            my_bar.progress(prog/5)
+            prog += 1
+    
+    del my_bar
+    
     koleksi_hasil = np.asarray(koleksi_hasil)
     koleksi_hasil_high = np.asarray(koleksi_hasil_high)
     koleksi_hasil_low = np.asarray(koleksi_hasil_low)
