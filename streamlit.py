@@ -257,21 +257,16 @@ def cek_naikTurun(cek):
     st.write("1 hari", next_price1[0][0], next_price1[1][0], next_price1[2][0])
     next_price7 = cek_hari(cek, 7)
     st.write("7 hari", next_price7[0][0], next_price7[1][0], next_price7[2][0])
-    
-    chart_data = pd.DataFrame(
-        np.array([
-            [close[-1], close[-1], close[-1]],
-            [next_price1[0][0], next_price1[1][0], next_price1[2][0]],
-            [next_price7[0][0], next_price7[1][0], next_price7[2][0]]
-        ]),
-        columns=['high', 'close', 'low'])
-    
-    c = alt.Chart(chart_data).mark_line().encode(
-        x='Hari',
-        y='Harga'
-    )
 
-    st.altair_chart(c, use_container_width=True)
+    arr = np.array([
+        [close[-1], close[-1], close[-1]],
+        [next_price1[0][0], next_price1[1][0], next_price1[2][0]],
+        [next_price7[0][0], next_price7[1][0], next_price7[2][0]]
+    ])
+    fig, ax = plt.subplots()
+    ax.plot(arr)
+
+    st.pyplot(fig)
 
 for cek in cekcek:
     cek_naikTurun(cek)
