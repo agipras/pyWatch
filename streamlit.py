@@ -264,6 +264,7 @@ def cek_naikTurun(cek):
         [next_price7[0][0], next_price7[1][0], next_price7[2][0]]
     ])
     fig, ax = plt.subplots()
+    ax.style.use('dark_background')
     ax.plot([0, 1, 7], arr)
 
     st.pyplot(fig)
