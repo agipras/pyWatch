@@ -266,7 +266,7 @@ def cek_naikTurun(cek):
     
     plt.style.use('dark_background')
     fig, ax = plt.subplots()
-    ax.plot([0, 1, 7], arr)
+    ax.plot([0, 1, 7], arr, 'o-')
     st.pyplot(fig)
 
 for cek in cekcek:
