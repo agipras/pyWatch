@@ -264,8 +264,13 @@ def cek_naikTurun(cek):
             [next_price7[0][0], next_price7[1][0], next_price7[2][0]]
         ]),
         columns=['high', 'close', 'low'])
+    
+    c = alt.Chart(chart_data).mark_line().encode(
+        x='Hari',
+        y='Harga'
+    )
 
-    st.line_chart(chart_data)
+    st.altair_chart(c, use_container_width=True)
 
 for cek in cekcek:
     cek_naikTurun(cek)
