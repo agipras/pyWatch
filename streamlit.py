@@ -175,7 +175,7 @@ def cek_hari(cek, hari):
     ]
     
 def cek_naikTurun(cek):
-    st.write(cek)
+    st.title(cek)
     scraper = CmcScraper(cek)
     df = scraper.get_dataframe()
     close = df["Close"].values[:2000][::-1]
@@ -252,10 +252,20 @@ def cek_naikTurun(cek):
     acc = accuracy_score(neigh.predict(x_test), y_test)
     st.write(acc, w, p)
     st.write("harga", close[-1], "stat: " + str(neigh.predict((close[-w:]-np.min(close[-w:]))/(np.max(close[-w:])-np.min(close[-w:])).reshape(1,-1))[0]))
-    next_price = cek_hari(cek, 1)
-    st.write("1 hari", next_price[0][0], next_price[1][0], next_price[2][0])
-    next_price = cek_hari(cek, 7)
-    st.write("7 hari", next_price[0][0], next_price[1][0], next_price[2][0])
+    next_price1 = cek_hari(cek, 1)
+    st.write("1 hari", next_price1[0][0], next_price1[1][0], next_price1[2][0])
+    next_price7 = cek_hari(cek, 7)
+    st.write("7 hari", next_price7[0][0], next_price7[1][0], next_price7[2][0])
+    
+    chart_data = pd.DataFrame(
+        np.array([
+            [close[-1], close[-1], close[-1]],
+            [next_price1[0][0], next_price1[1][0], next_price1[2][0]],
+            [next_price7[0][0], next_price7[1][0], next_price7[2][0]]
+        ]),
+        columns=['high', 'close', 'low'])
+
+    st.line_chart(chart_data)
 
 for cek in cekcek:
     cek_naikTurun(cek)
